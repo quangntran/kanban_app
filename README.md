@@ -6,6 +6,7 @@
 * Entering title is mandatory
 * Once a task is created, one can change its status to any other status
 * One can delete a task on board
+* If a column has no task, then it will indicate so
 
 ## Run the app
 ```console
