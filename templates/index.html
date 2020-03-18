@@ -40,70 +40,85 @@
       <div class="row">
           <div class="collect_tasks todo col-sm-4">
             <h2>Todo</h2>
-            {% for item in todo %}
-            <div class="task well">
-                <h4>{{ item.title }}</h4>
-                <p>{{ item.description }}</p>
-                <div class="edit">
-                    <form action="{{ url_for('update_state', id=item.id, state='doing') }}" method="POST">
-                        <input type="submit" value="Mark as Doing">
-                    </form>
-                    <form action="{{ url_for('update_state', id=item.id, state='done') }}" method="POST">
-                        <input type="submit" value="Mark as Done">
-                    </form>
-                    <form action="{{ url_for('delete', id=item.id) }}" method="POST">
-                        <input type="submit" value="Delete this task">
-                    </form>
+            {% if todo|length %}
+              {% for item in todo %}
+                <div class="task well">
+                    <h4>{{ item.title }}</h4>
+                    <p>{{ item.description }}</p>
+                    <div class="edit">
+                        <form action="{{ url_for('update_state', id=item.id, state='doing') }}" method="POST">
+                            <input type="submit" value="Mark as Doing">
+                        </form>
+                        <form action="{{ url_for('update_state', id=item.id, state='done') }}" method="POST">
+                            <input type="submit" value="Mark as Done">
+                        </form>
+                        <form action="{{ url_for('delete', id=item.id) }}" method="POST">
+                            <input type="submit" value="Delete this task">
+                        </form>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
-            </div>
+              {% endfor %}
+            {% else %}
+              <div class="well">
+                <p>No Tasks</p>
+              </div>
+            {% endif %}
+          </div>
 
           <div class="collect_tasks doing col-sm-4">
             <h2>Doing</h2>
-            {% for item in doing %}
-            <div class="task well">
-                <h4>{{ item.title }}</h4>
-                <p>{{ item.description }}</p>
-                <div class="edit">
-                    <form action="{{ url_for('update_state', id=item.id, state='todo') }}" method="POST">
-                        <input type="submit" value="Mark as To-do">
-                    </form>
-                    <form action="{{ url_for('update_state', id=item.id, state='done') }}" method="POST">
-                        <input type="submit" value="Mark as Done">
-                    </form>
-                    <form action="{{ url_for('delete', id=item.id) }}" method="POST">
-                        <input type="submit" value="Delete this task">
-                    </form>
+            {% if doing|length %}
+              {% for item in doing %}
+                <div class="task well">
+                    <h4>{{ item.title }}</h4>
+                    <p>{{ item.description }}</p>
+                    <div class="edit">
+                        <form action="{{ url_for('update_state', id=item.id, state='todo') }}" method="POST">
+                            <input type="submit" value="Mark as To-do">
+                        </form>
+                        <form action="{{ url_for('update_state', id=item.id, state='done') }}" method="POST">
+                            <input type="submit" value="Mark as Done">
+                        </form>
+                        <form action="{{ url_for('delete', id=item.id) }}" method="POST">
+                            <input type="submit" value="Delete this task">
+                        </form>
+                    </div>
                 </div>
-
-            </div>
-
-            {% endfor %}
+              {% endfor %}
+            {% else %}
+              <div class="well">
+                <p>No Tasks</p>
+              </div>
+            {% endif %}
           </div>
 
           <div class="collect_tasks done col-sm-4">
             <h2>Done</h2>
-            {% for item in done %}
-            <div class="task well">
-                <h4>{{ item.title }}</h4>
-                <p>{{ item.description }}</p>
-                <div class="edit">
-                    <form action="{{ url_for('update_state', id=item.id, state='todo') }}" method="POST">
-                        <input type="submit" value="Mark as To-do">
-                    </form>
-                    <form action="{{ url_for('update_state', id=item.id, state='doing') }}" method="POST">
-                        <input type="submit" value="Mark as Doing">
-                    </form>
-                    <form action="{{ url_for('delete', id=item.id) }}" method="POST">
-                        <input type="submit" value="Delete this task">
-                    </form>
+            {% if done|length %}
+              {% for item in done %}
+                <div class="task well">
+                    <h4>{{ item.title }}</h4>
+                    <p>{{ item.description }}</p>
+                    <div class="edit">
+                        <form action="{{ url_for('update_state', id=item.id, state='todo') }}" method="POST">
+                            <input type="submit" value="Mark as To-do">
+                        </form>
+                        <form action="{{ url_for('update_state', id=item.id, state='doing') }}" method="POST">
+                            <input type="submit" value="Mark as Doing">
+                        </form>
+                        <form action="{{ url_for('delete', id=item.id) }}" method="POST">
+                            <input type="submit" value="Delete this task">
+                        </form>
+                    </div>
+
                 </div>
-
+              {% endfor %}
+              {% else %}
+                <div class="well">
+                  <p>No Tasks</p>
+                </div>
+              {% endif %}
             </div>
-
-            {% endfor %}
-          </div>
 
       </div>
     </div>
