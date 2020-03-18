@@ -15,55 +15,42 @@ class Task(db.Model):
 
 @app.route('/')
 def index():
-    todo = Task.query.filter_by(state='todo').all()
-    doing = Task.query.filter_by(state='doing').all()
-    done = Task.query.filter_by(state='done').all()
+    todo = Task.query.filter_by(state='todo').all() # get all the todo tasks
+    doing = Task.query.filter_by(state='doing').all()# get all the doing tasks
+    done = Task.query.filter_by(state='done').all() # get all the done tasks
     # incomplete = Todo.query.filter_by(complete=False).all()
     # complete = Todo.query.filter_by(complete=True).all()
     return render_template('index.html', todo=todo, doing=doing, done=done)
 
 @app.route('/add', methods=['POST'])
 def add():
-    todo = Task(title=request.form['title'], description=request.form['description'], state=request.form['state'])
-    db.session.add(todo)
+    # create the task based on data
+    task_to_add = Task(title=request.form['title'], description=request.form['description'], state=request.form['state'])
+    # add task to db
+    db.session.add(task_to_add)
+    # commit the add
     db.session.commit()
     return redirect(url_for('index'))
 
 @app.route('/update_state/<id>/<state>', methods=['POST'])
 def update_state(id,state):
+    # get the task by id
     task = Task.query.filter_by(id=int(id)).first()
+    # update the state
     task.state = str(state)
+    # commit the update
     db.session.commit()
     return redirect(url_for('index'))
-
-# @app.route('/todo/<id>', methods=['POST'])
-# def todo(id):
-#     task = Task.query.filter_by(id=int(id)).first()
-#     task.state = 'todo'
-#     db.session.commit()
-#
-#     return redirect(url_for('index'))
-#
-# @app.route('/doing/<id>', methods=['POST'])
-# def doing(id):
-#     task = Task.query.filter_by(id=int(id)).first()
-#     task.state = 'doing'
-#     db.session.commit()
-#     return redirect(url_for('index'))
-#
-# @app.route('/done/<id>', methods=['POST'])
-# def done(id):
-#     task = Task.query.filter_by(id=int(id)).first()
-#     task.state = 'done'
-#     db.session.commit()
-#     return redirect(url_for('index'))
 
 @app.route('/delete/<id>', methods=['POST'])
 def delete(id):
+    # delete the task with the id
     Task.query.filter_by(id=int(id)).delete()
+    # commit the change
     db.session.commit()
     return redirect(url_for('index'))
 
+# create the db 
 db.create_all()
 db.session.commit()
 
