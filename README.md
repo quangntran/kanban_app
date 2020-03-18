@@ -8,6 +8,23 @@
 * One can delete a task on board
 * If a column has no task, then it will indicate so
 
+## Project Structure
+```
+kanban_project
+│   README.md
+│   requirements.txt    
+│   app.py
+|
+└───test
+│   │   test.py: unittest code
+|   
+└───templates
+|   │   index.html
+|
+└───static
+|   |   style.css: styling on top of Bootstrap 
+```
+
 ## Run the app
 ```console
 python3.6 -m venv .venv
