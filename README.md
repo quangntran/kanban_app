@@ -25,14 +25,3 @@ In Terminal directly at `kanban_project`, run:
 ```console
 python3 -m unittest discover test
 ```
-
-
-
-On your Shell, type the following:
-
-
-py -m venv env
-.\env\Scripts\activate
-pip3 install -r requirements.txt
-export FLASK_APP=app.py
-flask run
